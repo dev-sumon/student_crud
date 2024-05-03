@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->name }}</td>
-                                    <td>{{ $student->roll }}</td>
+                                    <td>{{ $student->role }}</td>
                                     <td>{{ $student->registration }}</td>
                                     <td>{{ date('d-m-Y H:i A', strtotime($student->created_at)) }}</td>
                                     <td>{{ ($student->created_at == $student->updated_at) ? "N/A" : date('d-m-Y H:i A', strtotime($student->updated_at)) }}</td>
