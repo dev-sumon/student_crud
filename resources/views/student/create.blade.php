@@ -18,24 +18,18 @@
                         <a href="{{ route('student.index') }}" class="btn btn-info btn-sm float-end">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('student.store') }}" method="POST" >
+                        <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="text" name="name" class="form-control mb-3" placeholder="Enter Your Name">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+
+                            <input type="file" name="image" accept="image/*" class="form-control mb-3" class="rounded">
+                                
                             <input type="text" name="roll" class="form-control mb-3" placeholder="Enter Your Roll">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                
                             <input type="text" name="reg" class="form-control mb-3" placeholder="Enter Your Registration">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                               
                             <input type="email" name="email" class="form-control mb-3" placeholder="Enter Your Email">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                
                             <input type="submit" value="Save" class="btn btn-outline-primary w-100">
                         </form>
                     </div>

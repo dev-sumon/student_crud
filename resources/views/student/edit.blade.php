@@ -18,9 +18,15 @@
                         <a href="{{ route('student.index') }}" class="btn btn-info btn-sm float-end">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('student.update',$student->id) }}" method="POST" >
+                        <form action="{{ route('student.update',$student->id) }}" method="POST">
                             @csrf
                             <input type="text" name="name" value="{{ $student->name }}" class="form-control mb-3" placeholder="Enter Your Name">
+                            <input type="file" name="image" accept="image/*" class="form-control mb-3">
+                            @if ($student->image)
+                                <div class="div">
+                                    <img src="{{ asset('storage/'.$student->image) }}" alt="{{ $student->name }}" height="100px" width="100px" class="rounded">
+                                </div>
+                            @endif
                             <input type="text" name="roll" value="{{ $student->role }}" class="form-control mb-3" placeholder="Enter Your Roll">
                             <input type="text" name="reg" value="{{ $student->registration }}" class="form-control mb-3" placeholder="Enter Your Registration">
                             <input type="email" name="email" class="form-control mb-3" value="{{ $student->email }}" placeholder="Enter Your Email">

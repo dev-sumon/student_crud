@@ -22,6 +22,7 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Roll</th>
                                 <th>Registration</th>
                                 <th>Created At</th>
@@ -32,6 +33,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->name }}</td>
+                                    <td>
+                                        <img src="{{ asset('storage/'.$student->image) }}" alt="{{ $student->name }}" height="100px" width="100px">
+                                    </td>
                                     <td>{{ $student->role }}</td>
                                     <td>{{ $student->registration }}</td>
                                     <td>{{ date('d-m-Y H:i A', strtotime($student->created_at)) }}</td>

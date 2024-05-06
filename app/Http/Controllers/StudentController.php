@@ -6,7 +6,8 @@ use App\Http\Requests\StudentRequest;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Carbon\Carbon;
-
+use Illuminate\Support\facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -19,12 +20,20 @@ class StudentController extends Controller
     public function create(){
         return view('student.create');
     }
-    public function store(StudentRequest $req){
+    public function store(Request $req){
         $insert = new Student();
+
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            $path = $image->store("students/$insert->id", 'public');
+            $insert->image = $path;
+        }
+        
         $insert->name = $req->name;
         $insert->role = $req->roll;
         $insert->registration = $req->reg;
         $insert->email = $req->email;
+        // $insert->image = $req->image;
         $insert->save();
         return redirect()->route('student.index');
     }
@@ -34,10 +43,20 @@ class StudentController extends Controller
     }
     public function update(Request $req, $id){
         $student = Student::findOrFail($id); 
+
+        if($req->hasFile('image')){
+            $image = $req->file('image');
+            $path = $image->store("students", 'public');
+            Storage::delete('public/' . $req->image);
+            $student->image = $path;
+        }
+        
+
         $student->name = $req->name;
         $student->role = $req->roll;
         $student->registration = $req->reg;
         $student->email = $req->email;
+        $student->image = $req->image;
         $student->updated_at = Carbon::now();
         $student->update();
         return redirect()->route('student.index');
