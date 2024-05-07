@@ -21,19 +21,27 @@
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
-                                    <th>Name</th>
-                                    <th>Roll</th>
-                                    <th>Reg</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
-                                    <th>Action</th>
+                                    {{-- <th>SL: </th>
+                                    <th>Name: {{ $students->name }}</th>
+                                    <th>Image: {{ $students->image }}</th>
+                                    <th>Roll: {{ $students->role }}</th>
+                                    <th>Reg: {{ $students->registration }}</th>
+                                    <th>Created At: {{ $students->created_at }}</th>
+                                    <th>Updated At: {{ $students->updated_at }}</th>
+                                    <th>Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 
                             </tbody>
                         </table>
+                                    <h2>Name: {{ $students->name }}</h2>
+                                    <p>Image: <img src="{{ asset('storage/'.$students->image) }}" alt="Student Image" width="100px" height="100px"> </p>
+                                    <p>Roll: {{ $students->role }}</p>
+                                    <p>Reg: {{ $students->registration }}</p>
+                                    <p>Created At: {{ $students->created_at }}</p>
+                                    <p>Updated At: {{ $students->updated_at }}</p>
+                                    <p>Action</p>
                     </div>
                 </div>
             </div>

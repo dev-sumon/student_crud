@@ -42,6 +42,7 @@
                                     <td>{{ ($student->created_at == $student->updated_at) ? "N/A" : date('d-m-Y H:i A', strtotime($student->updated_at)) }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
+                                            <a href="{{ route('student.show',$student->id) }}" class="btn btn-success btn-sm">View</a>
                                             <a href="{{ route('student.edit',$student->id) }}" class="btn btn-info btn-sm">Edit</a>
                                             <a href="{{ route('student.delete',$student->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                         </div>

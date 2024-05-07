@@ -41,30 +41,63 @@ class StudentController extends Controller
         $s['student'] = Student::findOrFail($id);
         return view('student.edit',$s);
     }
+    // public function update(Request $req, $id){
+    //     $student = Student::findOrFail($id); 
+
+    //     if($req->hasFile('image')){
+    //         $image = $req->file('image');
+    //         $path = $image->store("students", 'public');
+    //         Storage::delete('public/' . $req->image);
+    //         $student->image = $path;
+    //     }
+        
+
+    //     $student->name = $req->name;
+    //     $student->role = $req->roll;
+    //     $student->registration = $req->reg;
+    //     $student->email = $req->email;
+    //     $student->image = $req->image;
+    //     $student->updated_at = Carbon::now();
+    //     $student->update();
+    //     return redirect()->route('student.index');
+    // }
+
+
+
+
+
     public function update(Request $req, $id){
         $student = Student::findOrFail($id); 
-
+    
         if($req->hasFile('image')){
             $image = $req->file('image');
             $path = $image->store("students", 'public');
-            Storage::delete('public/' . $req->image);
-            $student->image = $path;
+            // Delete old image if exists
+            Storage::delete('public/' . $student->image);
+            $student->image = $path; // Assign new image path
         }
-        
-
+    
         $student->name = $req->name;
         $student->role = $req->roll;
         $student->registration = $req->reg;
         $student->email = $req->email;
-        $student->image = $req->image;
         $student->updated_at = Carbon::now();
         $student->update();
+        
         return redirect()->route('student.index');
     }
+    
+
+
     public function delete($id){
         $student = Student::findOrFail($id);
         $student->delete();
         return redirect()->route('student.index');
+    }
+
+    public function show($id){
+        $student = Student::find($id);
+        return view('student.show')->with('students', $student);
     }
         
    

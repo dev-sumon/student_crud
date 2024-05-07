@@ -18,7 +18,7 @@
                         <a href="{{ route('student.index') }}" class="btn btn-info btn-sm float-end">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('student.update',$student->id) }}" method="POST">
+                        <form action="{{ route('student.update',$student->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="text" name="name" value="{{ $student->name }}" class="form-control mb-3" placeholder="Enter Your Name">
                             <input type="file" name="image" accept="image/*" class="form-control mb-3">
