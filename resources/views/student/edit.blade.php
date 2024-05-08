@@ -20,17 +20,32 @@
                     <div class="card-body">
                         <form action="{{ route('student.update',$student->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="text" name="name" value="{{ $student->name }}" class="form-control mb-3" placeholder="Enter Your Name">
-                            <input type="file" name="image" accept="image/*" class="form-control mb-3">
+                            <input type="text" name="name" value="{{ $student->name }}" class="form-control mt-3" placeholder="Enter Your Name">
+                            @if($errors->has('name'))
+                                <div class="text-danger">{{ $errors->first('name') }}</div>
+                            @endif
+                            <input type="file" name="image" accept="image/*" class="form-control mt-3">
+                            @if($errors->has('image'))
+                                <div class="text-danger">{{ $errors->first('image') }}</div>
+                            @endif
                             @if ($student->image)
-                                <div class="div">
+                                <div class="div mt-3">
                                     <img src="{{ asset('storage/'.$student->image) }}" alt="{{ $student->name }}" height="100px" width="100px" class="rounded">
                                 </div>
                             @endif
-                            <input type="text" name="roll" value="{{ $student->role }}" class="form-control mb-3" placeholder="Enter Your Roll">
-                            <input type="text" name="reg" value="{{ $student->registration }}" class="form-control mb-3" placeholder="Enter Your Registration">
-                            <input type="email" name="email" class="form-control mb-3" value="{{ $student->email }}" placeholder="Enter Your Email">
-                            <input type="submit" value="Update" class="btn btn-outline-primary w-100">
+                            <input type="text" name="roll" value="{{ $student->roll }}" class="form-control mt-3" placeholder="Enter Your Roll">
+                            @if($errors->has('roll'))
+                                <div class="text-danger">{{ $errors->first('roll') }}</div>
+                            @endif
+                            <input type="text" name="reg" value="{{ $student->reg }}" class="form-control mt-3" placeholder="Enter Your Registration">
+                            @if($errors->has('reg'))
+                                <div class="text-danger">{{ $errors->first('reg') }}</div>
+                            @endif
+                            <input type="email" name="email" class="form-control mt-3" value="{{ $student->email }}" placeholder="Enter Your Email">
+                            @if($errors->has('email'))
+                                <div class="text-danger">{{ $errors->first('email') }}</div>
+                            @endif
+                            <input type="submit" value="Update" class="btn btn-outline-primary w-100 mt-3">
                         </form>
                     </div>
                 </div>

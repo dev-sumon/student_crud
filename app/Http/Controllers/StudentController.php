@@ -20,20 +20,20 @@ class StudentController extends Controller
     public function create(){
         return view('student.create');
     }
-    public function store(Request $req){
+    public function store(StudentRequest $req){
         $insert = new Student();
 
-        if($req->hasFile('image')){
+        if ($req->hasFile('image')) {
             $image = $req->file('image');
-            $path = $image->store("students/$insert->id", 'public');
+            $filename = $req->name . time() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs("students/", $filename, 'public');
             $insert->image = $path;
         }
         
         $insert->name = $req->name;
-        $insert->role = $req->roll;
-        $insert->registration = $req->reg;
+        $insert->roll = $req->roll;
+        $insert->reg = $req->reg;
         $insert->email = $req->email;
-        // $insert->image = $req->image;
         $insert->save();
         return redirect()->route('student.index');
     }
@@ -41,32 +41,7 @@ class StudentController extends Controller
         $s['student'] = Student::findOrFail($id);
         return view('student.edit',$s);
     }
-    // public function update(Request $req, $id){
-    //     $student = Student::findOrFail($id); 
-
-    //     if($req->hasFile('image')){
-    //         $image = $req->file('image');
-    //         $path = $image->store("students", 'public');
-    //         Storage::delete('public/' . $req->image);
-    //         $student->image = $path;
-    //     }
-        
-
-    //     $student->name = $req->name;
-    //     $student->role = $req->roll;
-    //     $student->registration = $req->reg;
-    //     $student->email = $req->email;
-    //     $student->image = $req->image;
-    //     $student->updated_at = Carbon::now();
-    //     $student->update();
-    //     return redirect()->route('student.index');
-    // }
-
-
-
-
-
-    public function update(Request $req, $id){
+    public function update(StudentRequest $req, $id){
         $student = Student::findOrFail($id); 
     
         if($req->hasFile('image')){
@@ -78,8 +53,8 @@ class StudentController extends Controller
         }
     
         $student->name = $req->name;
-        $student->role = $req->roll;
-        $student->registration = $req->reg;
+        $student->roll = $req->roll;
+        $student->reg = $req->reg;
         $student->email = $req->email;
         $student->updated_at = Carbon::now();
         $student->update();
@@ -92,6 +67,16 @@ class StudentController extends Controller
     public function delete($id){
         $student = Student::findOrFail($id);
         $student->delete();
+        return redirect()->route('student.index');
+    }
+    public function status($id){
+        $student = Student::findOrFail($id);
+        if($student->status == 1){
+            $student->status = 0;
+        }else{
+            $student->status = 1;
+        }
+        $student->update();
         return redirect()->route('student.index');
     }
 

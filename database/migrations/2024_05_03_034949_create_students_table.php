@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('role')->unique();
-            $table->bigInteger('registration')->unique();
+            $table->integer('roll')->unique();
+            $table->bigInteger('reg')->unique();
             $table->string('email')->unique();
+            $table->string('image');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

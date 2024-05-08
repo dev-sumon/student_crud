@@ -18,30 +18,50 @@
                         <a href="{{ route('student.index') }}" class="btn btn-info btn-sm float-end">Back</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-responsive">
-                            <thead>
+                        <table class="table table-responsive table-striped">
+                            
+                        <tbody>
                                 <tr>
-                                    {{-- <th>SL: </th>
-                                    <th>Name: {{ $students->name }}</th>
-                                    <th>Image: {{ $students->image }}</th>
-                                    <th>Roll: {{ $students->role }}</th>
-                                    <th>Reg: {{ $students->registration }}</th>
-                                    <th>Created At: {{ $students->created_at }}</th>
-                                    <th>Updated At: {{ $students->updated_at }}</th>
-                                    <th>Action</th> --}}
+                                    <th>Name</th>
+                                    <th>:</th>
+                                    <td>{{ $students->name }}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                
+                                    <th>Image</th>
+                                    <th>:</th>
+                                    <td><img src="{{ asset('storage/'.$students->image) }}" alt="{{ $students->name }}" height="50px" width="50px"></td>
+                                </tr>
+                                <tr>
+                                    <th>Roll</th>
+                                    <th>:</th>
+                                    <td> {{ $students->roll }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Reg</th>
+                                    <th>:</th>
+                                    <td> {{ $students->reg }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>:</th>
+                                    <td> <span class="{{$students->getStatusBg()}}">{{$students->getStatus()}}</span></td>
+                                </tr>
+                                <tr>
+                                    <th>Created At</th>
+                                    <th>:</th>
+                                    <td> {{ $students->created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Updated At</th>
+                                    <th>:</th>
+                                    <td> {{ $students->updated_at }}</td>
+                                </tr>
+                                
+
                                 
                             </tbody>
                         </table>
-                                    <h2>Name: {{ $students->name }}</h2>
-                                    <p>Image: <img src="{{ asset('storage/'.$students->image) }}" alt="Student Image" width="100px" height="100px"> </p>
-                                    <p>Roll: {{ $students->role }}</p>
-                                    <p>Reg: {{ $students->registration }}</p>
-                                    <p>Created At: {{ $students->created_at }}</p>
-                                    <p>Updated At: {{ $students->updated_at }}</p>
-                                    <p>Action</p>
+
                     </div>
                 </div>
             </div>

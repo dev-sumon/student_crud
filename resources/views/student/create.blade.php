@@ -20,17 +20,32 @@
                     <div class="card-body">
                         <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="text" name="name" class="form-control mb-3" placeholder="Enter Your Name">
+                            <input type="text" name="name" value="{{old('name')}}" class="form-control mt-3" placeholder="Enter Your Name">
+                            @if($errors->has('name'))
+                                <div class="text-danger">{{ $errors->first('name') }}</div>
+                            @endif
 
-                            <input type="file" name="image" accept="image/*" class="form-control mb-3" class="rounded">
+                            <input type="file" name="image" value="{{old('image')}}" accept="image/*" class="form-control mt-3" class="rounded">
+                            @if($errors->has('image'))
+                                <div class="text-danger">{{ $errors->first('image') }}</div>
+                            @endif
                                 
-                            <input type="text" name="roll" class="form-control mb-3" placeholder="Enter Your Roll">
+                            <input type="text" name="roll" value="{{old('roll')}}" class="form-control mt-3" placeholder="Enter Your Roll">
+                            @if($errors->has('roll'))
+                                <div class="text-danger">{{ $errors->first('roll') }}</div>
+                            @endif
                                 
-                            <input type="text" name="reg" class="form-control mb-3" placeholder="Enter Your Registration">
+                            <input type="text" name="reg" value="{{old('reg')}}" class="form-control mt-3" placeholder="Enter Your Registration">
+                            @if($errors->has('reg'))
+                                <div class="text-danger">{{ $errors->first('reg') }}</div>
+                            @endif
                                
-                            <input type="email" name="email" class="form-control mb-3" placeholder="Enter Your Email">
+                            <input type="email" name="email" value="{{old('email')}}" class="form-control mt-3" placeholder="Enter Your Email">
+                            @if($errors->has('email'))
+                                <div class="text-danger">{{ $errors->first('email') }}</div>
+                            @endif
                                 
-                            <input type="submit" value="Save" class="btn btn-outline-primary w-100">
+                            <input type="submit" value="Save" class="btn btn-outline-primary w-100 mt-3">
                         </form>
                     </div>
                 </div>

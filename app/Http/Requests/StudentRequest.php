@@ -11,7 +11,7 @@ class StudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,11 +21,28 @@ class StudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name'=>'required|max:20',
-            'roll'=>'required|max:6',
-            'registration'=>'required|max:10',
-            'email'=>'required',
+        $rules = [
+            'name' => 'required|max:50',
+            
         ];
+
+        if($this->route('id')){
+                $rules+=[
+                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+                    'roll' => 'required|numeric|digits:6|unique:students,roll,' . $this->route('id'),
+                    'reg' => 'required|numeric|digits:10|unique:students,reg,' . $this->route('id'),
+                    'email' => 'required|email|unique:students,email,' . $this->route('id'),
+                ];
+        }else{
+                $rules+=[
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+                    'roll' => 'required|numeric|digits:6|unique:students,roll',
+                    'reg' => 'required|numeric|digits:10|unique:students,reg',
+                    'email' => 'required|email|unique:students,email',
+                ];
+            
+        }
+        return $rules;
+
     }
 }

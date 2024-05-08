@@ -11,20 +11,21 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-10 mx-auto my-5">
+            <div class="full-width mx-auto my-5">
                 <div class="card">
                     <div class="card-header">
                         <h1 class="float-start">Student List</h1>
                         <a href="{{ route('student.create') }}" class="btn btn-info btn-sm float-end">Add Student</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-responsive">
+                        <table class="table table-responsive table-striped">
                             <tr>
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Roll</th>
                                 <th>Registration</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -34,10 +35,11 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->name }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/'.$student->image) }}" alt="{{ $student->name }}" height="100px" width="100px">
+                                        <img src="{{ asset('storage/'.$student->image) }}" alt="{{ $student->name }}" height="50px" width="50px">
                                     </td>
-                                    <td>{{ $student->role }}</td>
-                                    <td>{{ $student->registration }}</td>
+                                    <td>{{ $student->roll }}</td>
+                                    <td>{{ $student->reg }}</td>
+                                    <td><span class="{{$student->getStatusBg()}}">{{$student->getStatus()}}</span></td>
                                     <td>{{ date('d-m-Y H:i A', strtotime($student->created_at)) }}</td>
                                     <td>{{ ($student->created_at == $student->updated_at) ? "N/A" : date('d-m-Y H:i A', strtotime($student->updated_at)) }}</td>
                                     <td>
@@ -45,6 +47,7 @@
                                             <a href="{{ route('student.show',$student->id) }}" class="btn btn-success btn-sm">View</a>
                                             <a href="{{ route('student.edit',$student->id) }}" class="btn btn-info btn-sm">Edit</a>
                                             <a href="{{ route('student.delete',$student->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="{{ route('student.status',$student->id) }}" class="{{$student->getBtnStatusBg()}}">{{$student->getBtnStatus()}}</a>
                                         </div>
                                     </td>
                                 </tr>
